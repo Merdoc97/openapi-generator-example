@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>openapi-generator-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>openapi-generator-example</name>
+    <description>openapi-generator-example</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/${specFile}</inputSpec>
+                            <apiPackage>${apiPackage}</apiPackage>
+                            <modelPackage>${modelPackage}</modelPackage>
+                            <artifactId>${artifactId}</artifactId>
+                            <language>java</language>
+                            <additionalProperties>generatedAnnotation=false,hideGenerationTimestamp=true,java17=true,interfaceOnly=true,dateLibrary=java8,parentGroupId=org.springframework.boot,parentArtifactId=spring-boot-starter-parent,parentVersion=3.1.1,useLombok=true,useSpringfox=false,serializableModel=true,feign=false,useBeanValidation=true,performBeanValidation=true,swagger1AnnotationLibrary=false,swagger2AnnotationLibrary=false</additionalProperties>
+                            <groupId>com.example</groupId>
+                            <output>${project.basedir}/gen</output>
+                            <enablePostProcessFile>true</enablePostProcessFile>
+                            <skipValidateSpec>true</skipValidateSpec>
+                            <globalProperties>
+                                <apiTests>false</apiTests>
+                                <modelTests>false</modelTests>
+                                <apiDocs>false</apiDocs>
+                            </globalProperties>
+                            <generatorName>spring</generatorName>
+                            <library>spring-cloud</library>
+                            <templateDirectory>${project.basedir}/templates/spring-boot-lombok</templateDirectory>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=java.time.ZonedDateTime</typeMapping>
+                                <typeMapping>ZonedDateTime=OffsetDateTime</typeMapping>
+                                <typeMapping>Boolean=boolean</typeMapping>
+                            </typeMappings>
+                            <configOptions>
+                                <delegatePattern>false</delegatePattern>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
